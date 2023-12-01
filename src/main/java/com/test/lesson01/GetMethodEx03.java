@@ -16,7 +16,7 @@ public class GetMethodEx03 extends HttpServlet{
 		response.setCharacterEncoding("utf-8");
 		//response.setContentType("text/plain");
 		response.setContentType("text/json");
-		
+		//코드 변경사항
 		// add comment
 		
 		// Request Parameter 
