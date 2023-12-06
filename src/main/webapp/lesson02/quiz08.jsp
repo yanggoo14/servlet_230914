@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -72,6 +73,20 @@
 					<td>제목</td>
 				</tr>
 				</thead>
+				<tbody>
+				<%
+					for(Map<String, Object > book : list){
+				%>
+				<tr>
+					<td><%=book.get("id") %></td>
+					<td><img src="<%=book.get("image") %>" width="80"></td>
+					<td><a href="/lesson02/quiz08_1.jsp?id=<%=book.get("id") %>"><%=book.get("title") %></a></td>
+					<td></td>
+				</tr>
+				<%
+						}
+				%>
+				</tbody>
 			</table>
 		</div>
 </body>
