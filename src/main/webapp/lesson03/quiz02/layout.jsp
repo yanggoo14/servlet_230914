@@ -14,6 +14,10 @@
 	header{height:100px;}
 	.content{min-height:500px;}
 	footer{height:80px}
+	.music-info{
+	font-size:10px;
+	color:#999;
+}
 </style>
 </head>
 

@@ -1,8 +1,7 @@
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="java.util.*"%>
-<div class="d-flex border border-success p-3 mb-3">
-				<%
+			<%
 // 아티스트 정보 
 
     Map<String, Object> artistInfo = new HashMap<>();
@@ -81,37 +80,67 @@
     musicInfo.put("lyricist", "아이유");
     musicList.add(musicInfo);
 %>
+	<%
+		//1. 목록에서 클릭한경우(id 값)
+		Map<String, Object> target = null;
+		
+		if(request.getParameter("id") != null){
+			int id = Integer.valueOf(request.getParameter("id"));
+		for(Map<String, Object> music : musicList){
+			if(music.get("id").equals(id)){
+				target = music;
+				break;
+				}
+			}
+		}
+		
+		if(request.getParameter("search") != null){
+			String search = request.getParameter("search");
+			
+			for(Map<String, Object > music : musicList){
+				if(music.get("title").equals(search)){
+				target = music;
+				break;
+				}
+			}
+		}
+		
 				
-				<div class="mr-4">
+	
+	
+		
+		
+		//2. 상단에서 폼태그 검색(search 값)
+	%>
+			
+			<div class="mr-4">
 					<img src=<%=artistInfo.get("photo") %> alt="가수 이미지" width="180px">
 				</div>
 				<div>
-					<h3><%=artistInfo.get("name") %></h3>
+					<h3><%=artistInfo.get("title") %></h3>
 					<div><%=artistInfo.get("debute") %></div>
 					<div><%=artistInfo.get("agency") %></div>
 				</div>
-			</div>
+				
+				<div class="mr-4">
+					<img src=<%=target.get("thumbnail") %> alt="가수 이미지" width="180px">
+				</div>
+				<div>
+					<h3><%=target.get("title") %></h3>
+					<div class="text-success font-weight-bold"><%=target.get("singer") %></div>
+					<div class="music-info d-flex ml-2">
+						<div>
+							<div>앨범</div>
+							<div>재생시간</div>
+							<div>작곡가</div>
+							<div>작사가</div>
+						</div>
+						<div>
+							<div><%=target.get("album") %></div>
+							<div><%=(int)target.get("time") / 60 %>: <%=(int)target.get("time") % 60%></div>
+							<div><%=target.get("composer") %></div>
+							<div><%=target.get("lyricist") %></div>
+						</div>
+					</div>
+				</div>
 			
-			<h4>곡 정보</h4>
-			<table class="table text-conter">	
-				<thead>
-					<tr>
-						<th>no</th>
-						<th>제목</th>
-						<th>앨범</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						for(Map<String,Object> music : musicList){
-					%>
-					<tr>
-						<td><%=music.get("id") %></td>
-						<td><a href="content_layout.jsp?id=<%=music.get("id")%>"><%=music.get("title")%></a></td>
-						<td><%=music.get("album") %></td>
-					</tr>
-				<%
-						}
-				%>
-				</tbody>	
-			</table>
